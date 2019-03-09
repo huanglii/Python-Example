@@ -3,16 +3,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
 
-meteo_file = 'F:\\GIS_DATA\\weather\\2019030600_003.nc'
-fh = Dataset(meteo_file, mode='r')
+nc_file = 'F:\\GIS_DATA\\weather\\2019030600_003.nc'
+ds = Dataset(nc_file, mode='r')
 
 # print(fh.variables)
 
 # get variable value
-lons = fh.variables['longitude'][:]
-lats = fh.variables['latitude'][:]
-tmax = fh.variables['TMAX_2maboveground'][:]
-tmax_units = fh.variables['TMAX_2maboveground'].units
+lons = ds.variables['longitude'][:]
+lats = ds.variables['latitude'][:]
+tmax = ds.variables['TMAX_2maboveground'][:]
+tmax_units = ds.variables['TMAX_2maboveground'].units
 
 # lon, lat mean
 lon_0 = lons.min()
@@ -45,4 +45,4 @@ cbar.set_label(tmax_units)
 plt.title('Maximum Temperature')
 
 plt.show()
-fh.close()
+ds.close()
